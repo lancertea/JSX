@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jsx嵌入数据</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super();
+
+          this.state = {
+            //1.在{}中可以正常显示的内容
+            name: 'lancer', //string
+            age: 12, //number
+            abc: ['a', 'b', 'c'], //Array
+
+            //2.在{}中不可以正常显示的内容
+            n: null, //null
+            u: undefined, //undefined
+            b: true, //boolean
+
+            flag: true,
+
+            //3.对象不能作为jsx的子类
+            friend:{
+              name : 'aaa',
+              age : 18
+            }
+          };
+        }
+
+        render() {
+          return (
+            <div>
+              <h2>{this.state.name}</h2>
+              <h2>{this.state.age}</h2>
+              <h2>{this.state.abc}</h2>
+              <h2>{this.state.n}</h2>
+              <h2>{this.state.u}</h2>
+              <h2>{this.state.b}</h2> 
+
+              <h2>{this.state.flag ?'hello' : null}</h2>              
+              <h2>{this.state.flag && 'bye'}</h2>     
+              
+              {/*<h2>{this.state.friend}</h2>*/} 
+
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById('app'));
+    </script>
+  </body>
+</html>

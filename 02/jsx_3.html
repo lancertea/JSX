@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jsx绑定属性</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div style="color: blue; font-size: 20px;">原生html内联样式写法</div>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+    // 网易云音乐这边的一个缩略图的格式
+      function getSizeImage(url, size){
+        return url + `?param=${size}y${size}`
+      }
+      class App extends React.Component {
+        constructor() {
+          super();
+
+          this.state ={
+            title : "标题",
+            imgUrl : "http://p3.music.126.net/r6szFbVfieh2FKmGyt8PKQ==/109951165526336148.jpg",
+            link : "http://www.baidu.com",
+            active : true
+            }
+        }
+
+        render() {
+          const {title, imgUrl, link, active} =this.state;
+
+          return (
+            <div>
+               {/*1.绑定普通属性*/}
+              <h2 title = {title}>my title</h2>
+              <img src = {getSizeImage(imgUrl, 140)} alt = ""/>
+              <br/>
+              <a href = {link} target = '_blank'>百度一下</a>
+
+              {/*2.绑定class*/}
+              {/*class在JS里面是用来定义类的，所以这边定义类需要用className*/}
+              <div className={'box '}>我是块级元素</div>
+              <div className={'box '+ (active? 'active' : '')}>我也是块级元素</div>
+
+              {/*3.绑定style*/}
+              {/*属性值如果是常量注意要用引号引起来，属性之间用逗号隔开，属性名用驼峰形式*/}
+              <div style={{color : "red", fontSize : "20px"}}>我是div，绑定style属性</div>
+            </div>
+          )
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById('app'));
+    </script>
+  </body>
+</html>

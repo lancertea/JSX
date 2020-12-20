@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>利用react实现</title>
+  </head>
+  <body>
+    <!-- render函数渲染的内容会将原来的内容覆盖掉 -->
+    <div id="app">123</div>
+    <!-- 添加react的依赖 -->
+    <!-- crossorigin属性是为了拿到跨域脚本的错误信息-->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- 注意事项：使用jsx,并且希望script中的jsx的代码被解析，必须在script标签中添加一个属性：type="text/babel" -->
+    <script type="text/babel">
+      //render(渲染的内容，挂载的对象)
+      //<h2></h2>:jsx代码
+      //jsx特点：多个标签最外层（根）只能有一个标签
+      let message = 'Hello World';
+      function btnClick() {
+        message = 'Hello React';
+        console.log(message);
+        render(); //值改变后需要再一次调用render()，视图才能刷新
+      }
+
+      function render() {
+        ReactDOM.render(
+          <div>
+            <h2>{message}</h2>
+            <button onClick={btnClick}>改变文本</button>
+          </div>,
+          document.getElementById('app')
+        );
+      }
+      render();
+    </script>
+  </body>
+</html>

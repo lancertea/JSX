@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>原生js方式实现</title>
+  </head>
+  <body>
+    <h2 class="title"></h2>
+    <button class="btn">改变文本</button>
+  </body>
+  <script>
+    //命令式编程：每做一个动作，都是给计算机一步步命令
+    let m = 'Hello world';
+    const tE = document.getElementsByClassName('title')[0];
+    tE.innerHTML = m;
+
+    const bE = document.getElementsByClassName('btn')[0];
+    bE.addEventListener('click', (e) => {
+      m = 'Hello react';
+      tE.innerHTML = m;
+    });
+  </script>
+</html>

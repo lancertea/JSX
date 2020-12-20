@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>案例练习：电影列表</title>
+  </head>
+  <body>
+    <div id="app">123</div>
+    <!-- 添加react的依赖 -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super();
+
+          this.state = {
+              movies: ["星际穿越", "大话西游", "盗梦空间", "少年派"]
+          }
+        }
+        // ul>li{movie$}*5
+        render() {
+          const liArr = [];
+          for (let movie of this.state.movies){
+            liArr.push(<li>{movie}</li>);
+          }
+          return (
+            <div>
+              <h2>movies list1</h2>
+              <ul>
+                {liArr}
+              </ul>
+
+              <h2>movies list2</h2>
+              <ul>
+                {this.state.movies.map((item)=>{
+                  return <li>{item}</li>
+                })}
+              </ul>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById('app'));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jsx条件渲染</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            isLogin: true,
+            numbers: [10, 30, 120, 453, 55, 78, 111, 222],
+          };
+        }
+
+        render() {
+          const { isLogin, numbers } = this.state;
+          const titleDisplay = isLogin ? 'block' : 'none';
+          return (
+            <div>
+              {this.getTitleJsx()}
+              {/*2.三元运算符*/}
+              <button onClick={(e) => this.loginBtnClick()}>{isLogin ? '退出' : '登录'}</button>
+              <hr />
+              {/*3.逻辑运算*/}
+              <h2>{isLogin && 'hello~'}</h2>
+              {/*实现v-show*/}
+              <h2 style={{ display: titleDisplay }}>今天也要元气满满啊～</h2>
+
+              <h2>数字列表</h2>
+              <ul>
+                {numbers.filter((item) => {
+                  if (item >= 50) {
+                    return <li>{item}</li>;
+                  }
+                })}
+
+                {/*必须用map才能生成列表？*/}
+                {numbers
+                  .filter((item) => item >= 50)
+                  .map((item) => (
+                    <li>{item}</li>
+                  ))}
+              </ul>
+            </div>
+          );
+        }
+
+        //1.通过if判断，适用于逻辑代码非常多的情况
+        getTitleJsx() {
+          let titleJsx = null;
+          if (this.state.isLogin) {
+            titleJsx = <h2>欢迎回来~</h2>;
+          } else {
+            titleJsx = <h2>请先登录~</h2>;
+          }
+          return titleJsx;
+        }
+
+        loginBtnClick() {
+          this.setState({
+            isLogin: !this.state.isLogin,
+          });
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById('app'));
+    </script>
+  </body>
+</html>

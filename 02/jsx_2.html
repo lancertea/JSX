@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jsx嵌入表达式</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super();
+
+          this.state ={
+            firstname : 'lancer',
+            lastname : 'free'
+          }
+        }
+
+        render() {
+          const {firstname, lastname, isLogin} = this.state;
+
+          return (
+            <div>
+              {/*1.运算符表达式*/}
+              <h2>{firstname+' '+ lastname}</h2>
+              <h2>{20*50}</h2>
+
+              {/*2.三元表达式*/}
+              <h2>{isLogin?'welcome':"login in"}</h2>
+
+              {/*3.进行函数调用*/}
+              <h2>{this.getFullName()}</h2>
+            </div>
+          );
+        }
+
+        getFullName(){
+          return this.state.firstname + ' ' + this.state.lastname;
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById('app'));
+    </script>
+  </body>
+</html>

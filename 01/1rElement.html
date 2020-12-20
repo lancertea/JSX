@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>利用react组件化方式实现</title>
+  </head>
+  <body>
+    <div id="app">123</div>
+    <!-- 添加react的依赖 -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      //封装App组件
+      class App extends React.Component {
+
+        constructor() {
+          super(); //这里调用super()是因为它继承了React.Component这个父类，子类中必须通过该方法初始化父类的对象
+          //用this.message这种定义方式，只能改变数据，视图不会根据数据的改变而改变，我们手动调用react也没用
+          //this.message = 'Hello World';  
+
+          //想要实现数据和视图的双向绑定，这个数据要放到状态中去
+          this.state = {
+            message: 'Hello World'
+          }
+        }
+        render() {
+          return (
+            <div>
+              <h2>{this.state.message}</h2>
+              <button onClick={this.btnClick.bind(this)}>改变文本</button>
+            </div>
+          )
+        }
+
+        btnClick() {
+          //这里的this是个undefined,因为btnClick虽然是定义在类的内部，但是实际调用它的时候执行的是btnClick.apply(undefined)
+          //this.state.message = 'Hello React';
+
+          this.setState({
+            message: 'Hello React'
+          })
+        }
+
+      }
+
+      //渲染App组件
+      ReactDOM.render(<App/>, document.getElementById('app'));
+    </script>
+  </body>
+</html>
