@@ -134,9 +134,9 @@
         }
 
         changeItem(index, counter) {
-          const books = [...this.state.books];
+          //const books = [...this.state.books];
           this.setState({
-            books: books.map((item, indey) => {
+            books: this.state.books.map((item, indey) => {
               if (indey === index) {
                 item.count += counter;
               }
