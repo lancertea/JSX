@@ -11,7 +11,11 @@
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 
     <script>
-      // jsx -> babel -> React.createElement() -> ReactElement(对象树) -> ReactDOM.render -> 真实DOM
+      // jsx -> babel -> React.createElement() -> ReactElement(对象树) 即虚拟DOM -> ReactDOM.render -> 真实DOM
+      //React 元素是不可变对象。一旦被创建，你就无法更改它的子元素或者属性。一个元素就像电影的单帧：它代表了某个特定时刻的 UI。
+      //更新 UI 唯一的方式是创建一个全新的元素，并将其传入 ReactDOM.render()。
+      //尽管每一秒我们都会新建一个描述整个 UI 树的元素，React DOM 只会更新实际改变了的内容
+
       // React.createElement(标签, 属性, 子组件)
       const message = React.createElement('h2', null, 'hello');
 

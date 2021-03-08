@@ -53,7 +53,7 @@
               <ul>
                 {
                   //注意是如何传参的
-                  this.state.movies.map((item, index, arr) => {
+                  this.state.movies.map((item, index) => {
                     //onClick = (箭头函数aaa)aaa.call(undefined,event)  call这些操作无法改变箭头函数的this，但是可以传参
                     // let a =(e)=>{
                     //   console.log(this, e);
